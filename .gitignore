@@ -1,0 +1,11 @@
+# Misc
+*.ui.in~
+*.ui~
+
+# Meson related
+/_build
+/build
+/builddir
+
+# Flatpak related
+/.flatpak
