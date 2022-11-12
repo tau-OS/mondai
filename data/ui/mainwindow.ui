@@ -34,6 +34,12 @@
                   <object class="HeMiniContentBlock">
                     <property name="title" translatable="yes">tauOS Account Sync</property>
                     <property name="subtitle" translatable="yes">Syncs your data across devices.</property>
+
+                    <child>
+                      <object class="HeFillButton">
+                        <property name="label" translatable="yes">Next</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
 
@@ -41,6 +47,12 @@
                   <object class="HeMiniContentBlock">
                     <property name="title" translatable="yes">A service</property>
                     <property name="subtitle" translatable="yes">This service does X.</property>
+
+                    <child>
+                      <object class="HeFillButton">
+                        <property name="label" translatable="yes">Next</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
