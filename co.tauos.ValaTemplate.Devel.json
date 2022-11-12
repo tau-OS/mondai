@@ -1,9 +1,9 @@
 {
-    "app-id" : "co.tauos.ValaTemplate",
+    "app-id" : "co.tauos.Mondai",
     "runtime" : "co.tauos.Platform",
     "runtime-version" : "stable",
     "sdk" : "co.tauos.Sdk",
-    "command" : "co.tauos.ValaTemplate",
+    "command" : "co.tauos.Mondai",
     "finish-args" : [
         "--socket=wayland",
         "--socket=fallback-x11",
@@ -27,7 +27,7 @@
     ],
     "modules" : [
         {
-            "name" : "vala-template",
+            "name" : "mondai",
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts" : [

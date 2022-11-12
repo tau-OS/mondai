@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="ValaTemplateMainWindow" parent="HeApplicationWindow">
+  <template class="MondaiMainWindow" parent="HeApplicationWindow">
     <property name="default-width">360</property>
     <property name="default-height">360</property>
     <child>
@@ -22,10 +22,27 @@
         <child>
           <!-- The primary view -->
           <object class="HeViewMono">
-            <property name="title" translatable="yes">Hello, World!</property>
+            <property name="title" translatable="yes">Report an Issue</property>
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">This is a sample app using Helium technologies.</property>
+                <property name="label" translatable="yes">Please select the malfunctioning component.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="HeContentList">
+            <child>
+              <object class="HeMiniContentBlock">
+                <property name="title" translatable="yes">tauOS Account Sync</property>
+                <property name="subtitle" translatable="yes">Syncs your data across devices.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="HeMiniContentBlock">
+                <property name="title" translatable="yes">A service</property>
+                <property name="subtitle" translatable="yes">This service does X.</property>
               </object>
             </child>
           </object>
@@ -42,7 +59,7 @@
       </item>
       <item>
         <!-- The primary menu item to open the about -->
-        <attribute name="label" translatable="yes" context="primary menu">About tauOS Vala Template</attribute>
+        <attribute name="label" translatable="yes" context="primary menu">About tauOS Vala Mondai</attribute>
         <attribute name="action">win.about</attribute>
       </item>
     </section>

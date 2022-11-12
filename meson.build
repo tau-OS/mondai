@@ -1,4 +1,4 @@
-project('co.tauos.ValaTemplate', 'vala', version: '0.1.0')
+project('co.tauos.Mondai', 'vala', version: '0.1.0')
 
 gnome = import('gnome')
 i18n = import('i18n')
@@ -11,10 +11,10 @@ add_project_arguments(
 )
 
 if get_option('development')
-    app_id = 'co.tauos.ValaTemplate'
+    app_id = 'co.tauos.Mondai'
     name_suffix = ' (Development)'
 else
-    app_id = 'co.tauos.ValaTemplate'
+    app_id = 'co.tauos.Mondai'
     name_suffix = ''
 endif
 
@@ -39,7 +39,7 @@ add_project_arguments(
 
 asresources = gnome.compile_resources(
     'as-resources',
-    'data/co.tauos.ValaTemplate.gresource.xml',
+    'data/co.tauos.Mondai.gresource.xml',
     source_dir: 'data',
     c_name: 'as',
 )

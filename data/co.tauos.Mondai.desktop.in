@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type = Application
 Version = 1
-Name = tauOS Vala Template
+Name = Mondai
 Comment = A template for tauOS apps written in Vala
 Icon = @ICON_NAME@
 Exec = @COMMAND@

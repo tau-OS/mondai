@@ -1,4 +1,4 @@
-public class ValaTemplate.Application : He.Application {
+public class Mondai.Application : He.Application {
     private const GLib.ActionEntry app_entries[] = {
         { "quit", quit },
     };
@@ -12,7 +12,7 @@ public class ValaTemplate.Application : He.Application {
         Intl.textdomain (Config.GETTEXT_PACKAGE);
         Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
 
-        var app = new ValaTemplate.Application ();
+        var app = new Mondai.Application ();
         return app.run (args);
     }
 
@@ -25,7 +25,7 @@ public class ValaTemplate.Application : He.Application {
         accent_color.parse("#888888");
         default_accent_color = He.Color.from_gdk_rgba(accent_color);
 
-        resource_base_path = "/co/tauos/ValaTemplate";
+        resource_base_path = "/co/tauos/Mondai";
 
         base.startup ();
 

@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "meson",
-			"target": "co.tauos.ValaTemplate",
+			"target": "co.tauos.Mondai",
 			"mode": "build",
 			"problemMatcher": [
 				"$meson-gcc"
@@ -13,7 +13,7 @@
 		},
 		{
 			"type": "meson",
-			"target": "co.tauos.ValaTemplate",
+			"target": "co.tauos.Mondai",
 			"mode": "run",
 			"group": "test",
 			"problemMatcher": [],
