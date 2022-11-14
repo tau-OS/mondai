@@ -2,7 +2,7 @@
 <interface>
   <template class="MondaiMainWindow" parent="HeApplicationWindow">
     <property name="default-width">360</property>
-    <property name="default-height">360</property>
+    <property name="default-height">500</property>
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
@@ -29,32 +29,101 @@
             <property name="vexpand">1</property>
 
             <child>
-              <object class="HeContentList">
-                <child>
-                  <object class="HeMiniContentBlock">
-                    <property name="title" translatable="yes">tauOS Account Sync</property>
-                    <property name="subtitle" translatable="yes">Syncs your data across devices.</property>
+              <object class="GtkStack" id="stack">
+                <property name="vhomogeneous">true</property>
+                <property name="vexpand">true</property>
 
-                    <child>
-                      <object class="HeFillButton">
-                        <property name="label" translatable="yes">Next</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">select</property>
+                      <property name="child">
+                        <object class="GtkBox">
+                          <property name="orientation">vertical</property>
 
-                <child>
-                  <object class="HeMiniContentBlock">
-                    <property name="title" translatable="yes">A service</property>
-                    <property name="subtitle" translatable="yes">This service does X.</property>
+                          <child>
+                            <object class="GtkListBox">
+                              <property name="vexpand">1</property>
+                              <property name="valign">start</property>
+                              <property name="selection_mode">single</property>
 
-                    <child>
-                      <object class="HeFillButton">
-                        <property name="label" translatable="yes">Next</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                              <style>
+                                <class name="content-list"/>
+                              </style>
+                              <child>
+                                <object class="HeMiniContentBlock">
+                                  <property name="title" translatable="yes">tauOS Account Sync</property>
+                                  <property name="subtitle" translatable="yes">Syncs your data across devices.</property>
+                                </object>
+                              </child>
+
+                              <child>
+                                <object class="HeMiniContentBlock">
+                                  <property name="title" translatable="yes">A service</property>
+                                  <property name="subtitle" translatable="yes">This service does X.</property>
+                                </object>
+                              </child>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="HePillButton" id="to_describe">
+                              <property name="label">Next</property>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
+
+                  <child>
+                    <object class="GtkStackPage">
+                      <property name="name">describe</property>
+                      <property name="child">
+                        <object class="GtkBox">
+                          <property name="orientation">vertical</property>
+                          <property name="spacing">10</property>
+
+                          <child>
+                            <object class="GtkLabel">
+                              <property name="label" translatable="yes">Tell us the problem (Markdown supported)</property>
+                              <property name="halign">start</property>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="GtkTextView">
+                              <property name="vexpand">1</property>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="GtkLabel">
+                              <property name="label" translatable="yes">What should happen? (Markdown supported)</property>
+                              <property name="halign">start</property>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="GtkTextView">
+                              <property name="vexpand">1</property>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="GtkCheckButton">
+                              <property name="label" translatable="yes">I agree that my report will be made public</property>
+                            </object>
+                          </child>
+
+                          <child>
+                            <object class="HePillButton" id="submit">
+                              <property name="label">Submit</property>
+                            </object>
+                          </child>
+                        </object>
+                      </property>
+                    </object>
+                  </child>
               </object>
             </child>
           </object>

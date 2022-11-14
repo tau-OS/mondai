@@ -9,12 +9,21 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         { ACTION_ABOUT, action_about }
     };
 
+    [GtkChild]
+    unowned Gtk.Stack stack;
+
+    [GtkChild]
+    unowned He.PillButton to_describe;
+
+    [GtkChild]
+    unowned He.PillButton submit;
 
     public MainWindow (He.Application application) {
         Object (
             application: application,
             icon_name: Config.APP_ID,
-            title: _("Mondai")
+            title: _("Mondai"),
+            resizable: false
         );
     }
 
@@ -42,5 +51,9 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         actions = new SimpleActionGroup ();
         actions.add_action_entries (ACTION_ENTRIES, this);
         insert_action_group ("win", actions);
+
+        to_describe.clicked.connect(() => {
+            stack.visible_child_name = "describe";
+        });
     }
 }
