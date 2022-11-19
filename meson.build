@@ -37,11 +37,10 @@ add_project_arguments(
     language: 'c',
 )
 
-asresources = gnome.compile_resources(
-    'as-resources',
-    'data/co.tauos.Mondai.gresource.xml',
-    source_dir: 'data',
-    c_name: 'as',
+add_project_arguments(
+    '--gresourcesdir',
+    meson.current_build_dir() / 'data',
+    language: ['vala'],
 )
 
 sources = [
@@ -60,6 +59,8 @@ dependencies = [
     dependency('gmodule-2.0'),
 ]
 
+subdir('data')
+
 executable(
     meson.project_name(),
     sources,
@@ -67,8 +68,6 @@ executable(
     dependencies: dependencies,
     install: true,
 )
-
-subdir('data')
 
 gnome.post_install(
     glib_compile_schemas: true,

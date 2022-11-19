@@ -1,0 +1,116 @@
+using Gtk 4.0;
+using He 1;
+
+menu primary-menu {
+  item (_("About"), "win.about")
+}
+
+template MondaiMainWindow : He.ApplicationWindow {
+  default-width: 360;
+  default-height: 500;
+
+  Gtk.Box {
+    orientation: vertical;
+
+    He.AppBar {
+      show-back: false;
+      flat: true;
+
+      Gtk.MenuButton {
+        icon-name: "open-menu-symbolic";
+        menu-model: primary-menu;
+      }
+    }
+
+    Gtk.Stack stack {
+      vhomogeneous: true;
+      vexpand: true;
+      transition-type: slide_left_right;
+
+      Gtk.StackPage {
+        name: "select";
+        
+        child: He.ViewMono {
+          title: "Select a component";
+          hexpand: true;
+          vexpand: true;
+
+          Gtk.Box {
+            orientation: vertical;
+            hexpand: true;
+            vexpand: true;
+
+            Gtk.ListBox {
+              vexpand: true;
+              valign: start;
+              selection-mode: single;
+
+              styles ["content-list"]
+
+              He.MiniContentBlock {
+                title: "owo";
+                subtitle: "owo";
+              }
+              
+              He.MiniContentBlock {
+                title: "owo";
+                subtitle: "owo";
+              }
+            }
+
+            He.PillButton to_describe {
+              label: "Next";
+            }
+          }
+        };
+      }
+
+      Gtk.StackPage {
+        name: "describe";
+        
+        child: He.ViewMono {
+          title: "Describe the issue";
+          hexpand: true;
+          vexpand: true;
+
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 10;
+            hexpand: true;
+            vexpand: true;
+
+            Gtk.Label {
+              label: "Tell us the problem (Markdown supported)";
+              halign: start;
+            }
+
+            Gtk.ScrolledWindow {
+              Gtk.TextView {
+                vexpand: true;
+              }
+            }
+
+            Gtk.Label {
+              label: "What should happen? (Markdown supported)";
+              halign: start;
+            }
+
+            Gtk.ScrolledWindow {
+              Gtk.TextView {
+                vexpand: true;
+              }
+            }
+
+            Gtk.CheckButton {
+              label: "I agree that my report will be made public";
+            }
+
+            He.PillButton submit {
+              label: "Next";
+            }
+          }
+        };
+      }
+    }
+  }
+}

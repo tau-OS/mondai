@@ -2,6 +2,7 @@
   "recommendations": [
     "mesonbuild.mesonbuild",
     "prince781.vala",
-		"ms-vscode.cpptools"
+		"ms-vscode.cpptools",
+    "bodil.blueprint-gtk"
   ]
 }
