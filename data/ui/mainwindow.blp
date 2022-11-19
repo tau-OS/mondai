@@ -40,21 +40,53 @@ template MondaiMainWindow : He.ApplicationWindow {
             hexpand: true;
             vexpand: true;
 
-            Gtk.ListBox {
-              vexpand: true;
-              valign: start;
-              selection-mode: single;
+            Gtk.ScrolledWindow {
+              Gtk.ListBox {
+                vexpand: true;
+                valign: start;
+                selection-mode: single;
 
-              styles ["content-list"]
+                styles ["content-list"]
 
-              He.MiniContentBlock {
-                title: "owo";
-                subtitle: "owo";
-              }
-              
-              He.MiniContentBlock {
-                title: "owo";
-                subtitle: "owo";
+                He.MiniContentBlock {
+                  title: "Fermion";
+                  subtitle: "Use the command line";
+                }
+                
+                He.MiniContentBlock {
+                  title: "Abacus";
+                  subtitle: "Calculate stuff";
+                }
+
+                He.MiniContentBlock {
+                  title: "Modi";
+                  subtitle: "Display pictures";
+                }
+
+                He.MiniContentBlock {
+                  title: "Enigma";
+                  subtitle: "A simple text editor";
+                }
+
+                He.MiniContentBlock {
+                  title: "Kairos";
+                  subtitle: "Check the weather outside";
+                }
+
+                He.MiniContentBlock {
+                  title: "Buds";
+                  subtitle: "A contacts app";
+                }
+
+                He.MiniContentBlock {
+                  title: "Victrola";
+                  subtitle: "Play your music, in an elegant way";
+                }
+
+                He.MiniContentBlock {
+                  title: "Nixie";
+                  subtitle: "A simple clock app";
+                }
               }
             }
 
