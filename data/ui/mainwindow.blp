@@ -41,11 +41,13 @@ template MondaiMainWindow : He.ApplicationWindow {
             vexpand: true;
 
             Gtk.ScrolledWindow {
-              Gtk.ListBox {
+              Gtk.ListBox list_box {
                 vexpand: true;
                 valign: start;
                 selection-mode: single;
 
+                row-selected => on_listbox_row_selected();
+                
                 styles ["content-list"]
 
                 He.MiniContentBlock {
@@ -102,6 +104,7 @@ template MondaiMainWindow : He.ApplicationWindow {
 
             He.PillButton to_describe {
               label: "Next";
+              sensitive: false;
             }
           }
         };
@@ -129,6 +132,9 @@ template MondaiMainWindow : He.ApplicationWindow {
             Gtk.ScrolledWindow {
               Gtk.TextView {
                 vexpand: true;
+                buffer: TextBuffer {
+                  changed => on_description_textbuffer_changed();
+                };
               }
             }
 
@@ -140,15 +146,56 @@ template MondaiMainWindow : He.ApplicationWindow {
             Gtk.ScrolledWindow {
               Gtk.TextView {
                 vexpand: true;
+                buffer: TextBuffer {
+                  changed => on_expected_textbuffer_changed();
+                };
               }
             }
 
             Gtk.CheckButton {
               label: "I agree that my report will be made public";
+              toggled => on_checkbutton_toggled();     
             }
 
             He.PillButton submit {
-              label: "Next";
+              label: "Submit";
+              sensitive: false;
+            }
+          }
+        };
+      }
+
+      Gtk.StackPage {
+        name: "submitted";
+
+        child: He.ViewMono {
+          title: "Report submitted";
+
+          Gtk.Box {
+            orientation: vertical;
+            spacing: 10;
+            hexpand: true;
+            vexpand: true;
+
+            Gtk.Label {
+              label: "Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.";
+              halign: start;
+              wrap: true;
+            }
+
+            Gtk.Box {
+              orientation: vertical;
+
+              Gtk.Label {
+                label: "Your report can be accessed at this link:";
+                halign: start;
+              }
+
+              Gtk.LinkButton {
+                uri: "https://github.com";
+                label: "https://github.com";
+                halign: start;
+              }
             }
           }
         };

@@ -9,6 +9,11 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         { ACTION_ABOUT, action_about }
     };
 
+    private Gtk.ListBoxRow? selected;
+    private string description = "";
+    private string expected = "";
+    private bool agreed_tos = false;
+
     [GtkChild]
     unowned Gtk.Stack stack;
 
@@ -47,6 +52,42 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         about.present ();
     }
 
+    [GtkCallback]
+    private void on_listbox_row_selected (Gtk.ListBox self, Gtk.ListBoxRow? row) {
+        this.selected = row;
+        this.to_describe.sensitive = row != null;
+    }
+
+    [GtkCallback]
+    private void on_description_textbuffer_changed (Gtk.TextBuffer self) {
+        Gtk.TextIter start;
+        Gtk.TextIter end;
+        self.get_bounds(out start, out end);
+        
+        this.description = self.get_text(start, end, false);
+        update_submit_state();
+    }
+
+    [GtkCallback]
+    private void on_expected_textbuffer_changed (Gtk.TextBuffer self) {
+        Gtk.TextIter start;
+        Gtk.TextIter end;
+        self.get_bounds(out start, out end);
+        
+        this.expected = self.get_text(start, end, false);
+        update_submit_state();
+    }
+
+    [GtkCallback]
+    private void on_checkbutton_toggled (Gtk.CheckButton self) {
+        this.agreed_tos = self.active;
+        update_submit_state();
+    }
+
+    private void update_submit_state () {
+        this.submit.sensitive = this.agreed_tos && this.description != "" && this.expected != "";
+    }
+
     construct {
         actions = new SimpleActionGroup ();
         actions.add_action_entries (ACTION_ENTRIES, this);
@@ -54,6 +95,10 @@ public class Mondai.MainWindow : He.ApplicationWindow {
 
         to_describe.clicked.connect(() => {
             stack.visible_child_name = "describe";
+        });
+
+        submit.clicked.connect(() => {
+            stack.visible_child_name = "submitted";
         });
     }
 }
