@@ -30,6 +30,8 @@ conf.set_quoted(
 conf.set10('DEVELOPMENT', get_option('development'))
 configure_file(output: 'config.h', configuration: conf)
 
+subproject('blueprint-compiler', required: false)
+
 add_project_arguments(
     '-include',
     'config.h',
