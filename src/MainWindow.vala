@@ -88,6 +88,32 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         this.submit.sensitive = this.agreed_tos && this.description != "" && this.expected != "";
     }
 
+    private async void submit_report () {
+        var session = new Soup.Session ();
+        var message = new Soup.Message ("POST", "http://localhost:3000");
+
+        var gen = new Json.Generator();
+        var root = new Json.Node(Json.NodeType.OBJECT);
+        var object = new Json.Object();
+        root.set_object(object);
+        gen.set_root(root);
+
+        object.set_string_member("project_id", ((Mondai.ProductItem)this.selected.child).product.id ());
+        object.set_string_member("description", this.description);
+        object.set_string_member("expected", this.expected);
+
+        size_t length;
+        var json = gen.to_data(out length);
+        message.set_request_body_from_bytes ("application/json", new Bytes(json.data));
+        yield session.send_async(message, Priority.DEFAULT, null);
+
+        var status = message.get_status ();
+
+        if (status != Soup.Status.CREATED) {
+            error("Server returned a non-created status");
+        }  
+    }
+
     construct {
         actions = new SimpleActionGroup ();
         actions.add_action_entries (ACTION_ENTRIES, this);
@@ -98,7 +124,9 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         });
 
         submit.clicked.connect(() => {
-            stack.visible_child_name = "submitted";
+            submit_report.begin (() => {
+                stack.visible_child_name = "submitted";
+            });
         });
     }
 }

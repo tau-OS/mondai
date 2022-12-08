@@ -45,6 +45,7 @@ add_project_arguments(
 
 sources = [
     'src/Config.vapi',
+    'src/ProductItem.vala',
     'src/Application.vala',
     'src/MainWindow.vala',
 ]
@@ -57,6 +58,8 @@ dependencies = [
     dependency('gee-0.8'),
     dependency('libhelium-1'),
     dependency('gmodule-2.0'),
+    dependency('libsoup-3.0'),
+    dependency('json-glib-1.0'),
 ]
 
 subdir('data')
