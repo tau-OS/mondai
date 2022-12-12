@@ -27,7 +27,7 @@ jobs:
         name: "Build"
         with:
           bundle: modi.flatpak
-          manifest-path: co.tauos.Abacus.json
+          manifest-path: co.tauos.Mondai.json
           cache-key: flatpak-builder-${{ github.sha }}
           repository-name: catalogue
           repository-url: https://repo.tauos.co/catalogue.flatpakrepo
