@@ -19,7 +19,11 @@ install_data(
 )
 
 i18n.merge_file(
-    input: meson.project_name() + '.desktop.in',
+    input: configure_file(
+        input: meson.project_name() + '.desktop.in.in',
+        output: meson.project_name() + '.desktop.in',
+        configuration: conf,
+    ),
     output: meson.project_name() + '.desktop',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     type: 'desktop',
@@ -28,7 +32,11 @@ i18n.merge_file(
 )
 
 i18n.merge_file(
-    input: meson.project_name() + '.appdata.xml.in',
+    input: configure_file(
+        input: meson.project_name() + '.appdata.xml.in.in',
+        output: meson.project_name() + '.appdata.xml.in',
+        configuration: conf,
+    ),
     output: meson.project_name() + '.appdata.xml',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
     install: true,
