@@ -22,7 +22,7 @@ desktop_file = i18n.merge_file(
     input: configure_file(
         input: meson.project_name() + '.desktop.in.in',
         output: meson.project_name() + '.desktop.in',
-        configuration: conf,
+        configuration: {'ICON_NAME': app_id, 'COMMAND': app_id},
     ),
     output: meson.project_name() + '.desktop',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),
@@ -40,7 +40,7 @@ i18n.merge_file(
     input: configure_file(
         input: meson.project_name() + '.appdata.xml.in.in',
         output: meson.project_name() + '.appdata.xml.in',
-        configuration: conf,
+        configuration: {'APP_ID': app_id, 'GETTEXT_PACKAGE': app_id},
     ),
     output: meson.project_name() + '.appdata.xml',
     po_dir: join_paths(meson.source_root(), 'po', 'extra'),

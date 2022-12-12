@@ -19,11 +19,11 @@ else
 endif
 
 conf = configuration_data()
-conf.set('APP_ID', app_id)
-conf.set('NAME_SUFFIX', name_suffix)
-conf.set('VERSION', meson.project_version())
-conf.set('GETTEXT_PACKAGE', app_id)
-conf.set(
+conf.set_quoted('APP_ID', app_id)
+conf.set_quoted('NAME_SUFFIX', name_suffix)
+conf.set_quoted('VERSION', meson.project_version())
+conf.set_quoted('GETTEXT_PACKAGE', app_id)
+conf.set_quoted(
     'LOCALEDIR',
     join_paths(get_option('prefix'), get_option('localedir')),
 )
