@@ -90,7 +90,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
 
     private async void submit_report () {
         var session = new Soup.Session ();
-        var message = new Soup.Message ("POST", "http://localhost:3000");
+        var message = new Soup.Message ("POST", "https://mondai.fyralabs.com");
 
         var gen = new Json.Generator();
         var root = new Json.Node(Json.NodeType.OBJECT);
@@ -98,7 +98,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         root.set_object(object);
         gen.set_root(root);
 
-        object.set_string_member("project_id", ((Mondai.ProductItem)this.selected.child).product.id ());
+        object.set_string_member("product_id", ((Mondai.ProductItem)this.selected.child).product.id ());
         object.set_string_member("description", this.description);
         object.set_string_member("expected", this.expected);
 
