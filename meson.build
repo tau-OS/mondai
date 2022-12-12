@@ -45,7 +45,10 @@ add_project_arguments(
     language: ['vala'],
 )
 
+subdir('data')
+
 sources = [
+    asresources,
     'src/Config.vapi',
     'src/ProductItem.vala',
     'src/Application.vala',
@@ -63,8 +66,6 @@ dependencies = [
     dependency('libsoup-3.0'),
     dependency('json-glib-1.0'),
 ]
-
-subdir('data')
 
 executable(
     meson.project_name(),
