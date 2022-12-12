@@ -1,0 +1,53 @@
+{
+  "app-id": "co.tauos.Mondai",
+  "runtime": "co.tauos.Platform",
+  "runtime-version": "stable",
+  "sdk": "co.tauos.Sdk",
+  "sdk-extensions": ["org.freedesktop.Sdk.Extension.vala"],
+  "finish-args": [
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--share=ipc",
+    "--device=dri",
+    "--share=network"
+  ],
+  "build-options": {
+    "append-path": "/usr/lib/sdk/vala/bin",
+    "prepend-ld-library-path": "/usr/lib/sdk/vala/lib"
+  },
+  "cleanup": [
+    "/cache",
+    "/man",
+    "/share/aclocal",
+    "/share/devhelp",
+    "/lib/systemd",
+    "/include",
+    "/lib/pkgconfig",
+    "/lib/libvala*",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/vala",
+    "*.a",
+    "*.la"
+  ],
+  "modules": [
+    {
+      "name": "mondai",
+      "builddir": true,
+      "buildsystem": "meson",
+      "config-opts": ["-Ddevelopment=false"],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "."
+        },
+        {
+          "type": "git",
+          "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler.git",
+          "branch": "main",
+          "dest": "./subprojects/blueprint-compiler"
+        }
+      ]
+    }
+  ]
+}
