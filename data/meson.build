@@ -2,14 +2,14 @@
 scalable_dir = 'icons/scalable/apps'
 install_data(
     scalable_dir / f'co.tauos.Mondai.svg',
-    install_dir: get_option('datadir') / 'icons/hicolor' / scalable_dir,
+    install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
 )
 
 symbolic_dir = 'icons/symbolic/apps'
 install_data(
     symbolic_dir / f'co.tauos.Mondai-symbolic.svg',
 
-    install_dir: get_option('datadir') / 'icons/hicolor' / symbolic_dir,
+    install_dir: get_option('datadir') / 'icons/hicolor/symbolic/apps',
     rename: f'co.tauos.Mondai-symbolic.svg',
 )
 
