@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type = Application
 Name = Mondai
-Comment = A template for tauOS apps written in Vala
+Comment = Problem reporting app for tauOS
 Icon = @ICON_NAME@
 Exec = @COMMAND@
 Categories = GTK;GNOME;
