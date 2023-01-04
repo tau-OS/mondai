@@ -47,7 +47,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
             {"Lleyton"},
             2022,
             He.AboutWindow.Licenses.GPLv3,
-            He.Colors.RED
+            He.Colors.DARK
         );
         about.present ();
     }
