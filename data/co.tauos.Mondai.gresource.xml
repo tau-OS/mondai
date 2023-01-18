@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="/co/tauos/Mondai">
     <file compressed="true" preprocess="xml-stripblanks" alias="mainwindow.ui">ui/mainwindow.ui</file>
+    <file compressed="true" alias="style.css">style.css</file>
   </gresource>
 </gresources>

@@ -12,9 +12,11 @@ template MondaiMainWindow : He.ApplicationWindow {
   Gtk.Box {
     orientation: vertical;
 
-    He.AppBar {
+    He.AppBar appbar {
       show-back: false;
       flat: true;
+      viewtitle-label: _("Select a component");
+      scroller: s;
 
       Gtk.MenuButton {
         icon-name: "open-menu-symbolic";
@@ -31,7 +33,6 @@ template MondaiMainWindow : He.ApplicationWindow {
         name: "select";
         
         child: He.ViewMono {
-          title: "Select a component";
           hexpand: true;
           vexpand: true;
 
@@ -40,7 +41,8 @@ template MondaiMainWindow : He.ApplicationWindow {
             hexpand: true;
             vexpand: true;
 
-            Gtk.ScrolledWindow {
+            Gtk.ScrolledWindow s {
+              vexpand: true;
               Gtk.ListBox list_box {
                 vexpand: true;
                 valign: start;
@@ -105,54 +107,55 @@ template MondaiMainWindow : He.ApplicationWindow {
         name: "describe";
         
         child: He.ViewMono {
-          title: "Describe the issue";
           hexpand: true;
           vexpand: true;
 
-          Gtk.Box {
-            orientation: vertical;
-            spacing: 10;
-            hexpand: true;
-            vexpand: true;
+            Gtk.ScrolledWindow s1 {
+              vexpand: true;
 
-            Gtk.Label {
-              label: "Tell us the problem (Markdown supported)";
-              halign: start;
-            }
-
-            Gtk.ScrolledWindow {
-              Gtk.TextView {
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 12;
+                hexpand: true;
                 vexpand: true;
-                buffer: TextBuffer {
-                  changed => on_description_textbuffer_changed();
-                };
+
+                Gtk.Label {
+                  label: _("Tell us the problem (Markdown supported)");
+                  halign: start;
+                }
+
+                Gtk.TextView {
+                  vexpand: true;
+                  buffer: TextBuffer {
+                    changed => on_description_textbuffer_changed();
+                  };
+                  styles ["text-view"]
+                }
+
+                Gtk.Label {
+                  label: _("What should happen? (Markdown supported)");
+                  halign: start;
+                }
+
+                Gtk.TextView {
+                  vexpand: true;
+                  buffer: TextBuffer {
+                    changed => on_expected_textbuffer_changed();
+                  };
+                  styles ["text-view"]
+                }
+
+                Gtk.CheckButton {
+                  label: _("I agree that my report will be made public");
+                  toggled => on_checkbutton_toggled();     
+                }
               }
             }
 
-            Gtk.Label {
-              label: "What should happen? (Markdown supported)";
-              halign: start;
-            }
-
-            Gtk.ScrolledWindow {
-              Gtk.TextView {
-                vexpand: true;
-                buffer: TextBuffer {
-                  changed => on_expected_textbuffer_changed();
-                };
-              }
-            }
-
-            Gtk.CheckButton {
-              label: "I agree that my report will be made public";
-              toggled => on_checkbutton_toggled();     
-            }
-
-            He.PillButton submit {
-              label: "Submit";
-              sensitive: false;
-              margin-top: 12;
-            }
+          He.PillButton submit {
+            label: "Submit";
+            sensitive: false;
+            margin-top: 12;
           }
         };
       }
@@ -161,7 +164,7 @@ template MondaiMainWindow : He.ApplicationWindow {
         name: "submitted";
 
         child: He.ViewMono {
-          title: "Report submitted";
+          title: _("Report submitted");
 
           Gtk.Box {
             orientation: vertical;
@@ -169,10 +172,12 @@ template MondaiMainWindow : He.ApplicationWindow {
             hexpand: true;
             vexpand: true;
 
-            Gtk.Label {
-              label: "Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.";
-              halign: start;
-              wrap: true;
+            Gtk.ScrolledWindow s2 {
+              Gtk.Label {
+                label: _("Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.");
+                halign: start;
+                wrap: true;
+              }
             }
           }
         };

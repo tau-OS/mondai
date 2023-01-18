@@ -15,6 +15,15 @@ public class Mondai.MainWindow : He.ApplicationWindow {
     private bool agreed_tos = false;
 
     [GtkChild]
+    unowned He.AppBar appbar;
+    [GtkChild]
+    unowned Gtk.ScrolledWindow s;
+    [GtkChild]
+    unowned Gtk.ScrolledWindow s1;
+    [GtkChild]
+    unowned Gtk.ScrolledWindow s2;
+
+    [GtkChild]
     unowned Gtk.Stack stack;
 
     [GtkChild]
@@ -119,13 +128,41 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         actions.add_action_entries (ACTION_ENTRIES, this);
         insert_action_group ("win", actions);
 
+        stack.visible_child_name = "select";
+        appbar.viewtitle_label = "";
+        appbar.viewtitle_label = _("Select a component");
+        appbar.show_back = false;
+        appbar.scroller = s;
+
         to_describe.clicked.connect(() => {
             stack.visible_child_name = "describe";
+            appbar.viewtitle_label = "";
+            appbar.viewtitle_label = _("Describe the issue");
+            appbar.scroller = s1;
+            appbar.show_back = true;
+
+            appbar.back_button.clicked.connect (() => {
+                stack.visible_child_name = "select";
+                appbar.viewtitle_label = "";
+                appbar.viewtitle_label = _("Select a component");
+                appbar.show_back = false;
+                appbar.scroller = s;
+            });
         });
 
         submit.clicked.connect(() => {
             submit_report.begin (() => {
                 stack.visible_child_name = "submitted";
+                appbar.viewtitle_label = "";
+                appbar.viewtitle_label = _("Report submitted!");
+                appbar.scroller = s2;
+
+                appbar.back_button.clicked.connect (() => {
+                    stack.visible_child_name = "describe";
+                    appbar.viewtitle_label = "";
+                    appbar.viewtitle_label = _("Describe the issue");
+                    appbar.scroller = s1;
+                });
             });
         });
     }

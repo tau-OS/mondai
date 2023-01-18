@@ -1,11 +1,10 @@
 {
   "app-id": "co.tauos.Mondai",
   "runtime": "co.tauos.Sdk",
-  "runtime-version": "stable",
+  "runtime-version": "daily",
   "sdk": "co.tauos.Sdk",
-  "sdk-extensions": ["org.freedesktop.Sdk.Extension.vala"],
   "command": "co.tauos.Mondai",
-  "desktop-file-name-suffix": " (Development)",
+  "desktop-file-name-suffix": " (Nightly)",
   "finish-args": [
     "--socket=wayland",
     "--socket=fallback-x11",
@@ -13,10 +12,6 @@
     "--device=dri",
     "--share=network"
   ],
-  "build-options": {
-    "append-path": "/usr/lib/sdk/vala/bin",
-    "prepend-ld-library-path": "/usr/lib/sdk/vala/lib"
-  },
   "cleanup": [
     "/cache",
     "/man",
@@ -37,7 +32,9 @@
       "name": "mondai",
       "builddir": true,
       "buildsystem": "meson",
-      "config-opts": ["-Ddevelopment=true"],
+      "config-opts": [
+        "-Ddevelopment=true"
+      ],
       "sources": [
         {
           "type": "dir",
