@@ -7,15 +7,15 @@ menu primary-menu {
 
 template MondaiMainWindow : He.ApplicationWindow {
   default-width: 360;
-  default-height: 550;
+  default-height: 700;
+  resizable: false;
 
   Gtk.Box {
     orientation: vertical;
 
     He.AppBar appbar {
       show-back: false;
-      flat: true;
-      viewtitle-label: _("Select a component");
+      show-buttons: true;
       scroller: s;
 
       Gtk.MenuButton {
