@@ -3,3 +3,7 @@
     padding: 6px;
     font-size: 16px;
 }
+.text-view.view,
+.text-view.view text {
+  background: shade(@view_bg_color, 0.98);
+}
