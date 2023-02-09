@@ -1,8 +1,10 @@
 {
-  "app-id": "co.tauos.Mondai",
-  "runtime": "co.tauos.Platform",
-  "runtime-version": "stable",
-  "sdk": "co.tauos.Sdk",
+  "app-id": "com.fyralabs.Mondai",
+  "runtime": "com.fyralabs.Sdk",
+  "runtime-version": "daily",
+  "sdk": "com.fyralabs.Sdk",
+  "command": "com.fyralabs.Mondai",
+  "desktop-file-name-suffix": " (Nightly)",
   "finish-args": [
     "--socket=wayland",
     "--socket=fallback-x11",
@@ -30,7 +32,9 @@
       "name": "mondai",
       "builddir": true,
       "buildsystem": "meson",
-      "config-opts": ["-Ddevelopment=false"],
+      "config-opts": [
+        "-Ddevelopment=true"
+      ],
       "sources": [
         {
           "type": "dir",

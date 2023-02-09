@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/co/tauos/Mondai">
+  <gresource prefix="/com/fyralabs/Mondai">
     <file compressed="true" preprocess="xml-stripblanks" alias="mainwindow.ui">ui/mainwindow.ui</file>
     <file compressed="true" alias="style.css">style.css</file>
   </gresource>

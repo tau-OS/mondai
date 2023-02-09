@@ -1,16 +1,16 @@
 # install app icons
 scalable_dir = 'icons/scalable/apps'
 install_data(
-    scalable_dir / f'co.tauos.Mondai.svg',
+    scalable_dir / f'com.fyralabs.Mondai.svg',
     install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
 )
 
 symbolic_dir = 'icons/symbolic/apps'
 install_data(
-    symbolic_dir / f'co.tauos.Mondai-symbolic.svg',
+    symbolic_dir / f'com.fyralabs.Mondai-symbolic.svg',
 
     install_dir: get_option('datadir') / 'icons/hicolor/symbolic/apps',
-    rename: f'co.tauos.Mondai-symbolic.svg',
+    rename: f'com.fyralabs.Mondai-symbolic.svg',
 )
 
 install_data(
@@ -65,7 +65,7 @@ blueprints = custom_target(
 
 asresources = gnome.compile_resources(
     'as-resources',
-    'co.tauos.Mondai.gresource.xml',
+    'com.fyralabs.Mondai.gresource.xml',
     source_dir: meson.current_build_dir(),
     dependencies: blueprints,
     c_name: 'as',

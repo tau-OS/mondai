@@ -1,4 +1,4 @@
-[GtkTemplate (ui = "/co/tauos/Mondai/mainwindow.ui")]
+[GtkTemplate (ui = "/com/fyralabs/Mondai/mainwindow.ui")]
 public class Mondai.MainWindow : He.ApplicationWindow {
     public SimpleActionGroup actions { get; construct; }
 
@@ -34,29 +34,29 @@ public class Mondai.MainWindow : He.ApplicationWindow {
 
     public MainWindow (He.Application application) {
         Object (
-            application: application,
-            icon_name: Config.APP_ID,
-            title: _("Mondai"),
-            resizable: false
+                application: application,
+                icon_name: Config.APP_ID,
+                title: _("Mondai"),
+                resizable: false
         );
     }
 
     public void action_about () {
         var about = new He.AboutWindow (
-            this,
-            "Mondai",
-            Config.APP_ID,
-            Config.VERSION,
-            Config.APP_ID,
-            "https://github.com/tau-os/mondai/tree/main/po",
-            "https://github.com/tau-os/mondai/issues/new",
-            "https://github.com/tau-os/mondai",
-            // TRANSLATORS: 'Name <email@domain.com>' or 'Name https://website.example'
-            {},
-            {"Lleyton"},
-            2022,
-            He.AboutWindow.Licenses.GPLv3,
-            He.Colors.DARK
+                                        this,
+                                        "Mondai",
+                                        Config.APP_ID,
+                                        Config.VERSION,
+                                        Config.APP_ID,
+                                        "https://github.com/tau-os/mondai/tree/main/po",
+                                        "https://github.com/tau-os/mondai/issues/new",
+                                        "https://github.com/tau-os/mondai",
+                                        // TRANSLATORS: 'Name <email@domain.com>' or 'Name https://website.example'
+                                        {},
+                                        { "Fyra Labs" },
+                                        2022,
+                                        He.AboutWindow.Licenses.GPLv3,
+                                        He.Colors.DARK
         );
         about.present ();
     }
@@ -71,26 +71,26 @@ public class Mondai.MainWindow : He.ApplicationWindow {
     private void on_description_textbuffer_changed (Gtk.TextBuffer self) {
         Gtk.TextIter start;
         Gtk.TextIter end;
-        self.get_bounds(out start, out end);
-        
-        this.description = self.get_text(start, end, false);
-        update_submit_state();
+        self.get_bounds (out start, out end);
+
+        this.description = self.get_text (start, end, false);
+        update_submit_state ();
     }
 
     [GtkCallback]
     private void on_expected_textbuffer_changed (Gtk.TextBuffer self) {
         Gtk.TextIter start;
         Gtk.TextIter end;
-        self.get_bounds(out start, out end);
-        
-        this.expected = self.get_text(start, end, false);
-        update_submit_state();
+        self.get_bounds (out start, out end);
+
+        this.expected = self.get_text (start, end, false);
+        update_submit_state ();
     }
 
     [GtkCallback]
     private void on_checkbutton_toggled (Gtk.CheckButton self) {
         this.agreed_tos = self.active;
-        update_submit_state();
+        update_submit_state ();
     }
 
     private void update_submit_state () {
@@ -101,26 +101,26 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         var session = new Soup.Session ();
         var message = new Soup.Message ("POST", "https://mondai.fyralabs.com");
 
-        var gen = new Json.Generator();
-        var root = new Json.Node(Json.NodeType.OBJECT);
-        var object = new Json.Object();
-        root.set_object(object);
-        gen.set_root(root);
+        var gen = new Json.Generator ();
+        var root = new Json.Node (Json.NodeType.OBJECT);
+        var object = new Json.Object ();
+        root.set_object (object);
+        gen.set_root (root);
 
-        object.set_string_member("product_id", ((Mondai.ProductItem)this.selected.child).product.id ());
-        object.set_string_member("description", this.description);
-        object.set_string_member("expected", this.expected);
+        object.set_string_member ("product_id", ((Mondai.ProductItem) this.selected.child).product.id ());
+        object.set_string_member ("description", this.description);
+        object.set_string_member ("expected", this.expected);
 
         size_t length;
-        var json = gen.to_data(out length);
-        message.set_request_body_from_bytes ("application/json", new Bytes(json.data));
-        yield session.send_async(message, Priority.DEFAULT, null);
+        var json = gen.to_data (out length);
+        message.set_request_body_from_bytes ("application/json", new Bytes (json.data));
+        yield session.send_async (message, Priority.DEFAULT, null);
 
         var status = message.get_status ();
 
         if (status != Soup.Status.CREATED) {
-            error("Server returned a non-created status");
-        }  
+            error ("Server returned a non-created status");
+        }
     }
 
     construct {
@@ -134,7 +134,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         appbar.show_back = false;
         appbar.scroller = s;
 
-        to_describe.clicked.connect(() => {
+        to_describe.clicked.connect (() => {
             stack.visible_child_name = "describe";
             appbar.viewtitle_label = "";
             appbar.viewtitle_label = _("Describe the issue");
@@ -150,7 +150,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
             });
         });
 
-        submit.clicked.connect(() => {
+        submit.clicked.connect (() => {
             submit_report.begin (() => {
                 stack.visible_child_name = "submitted";
                 appbar.viewtitle_label = "";
