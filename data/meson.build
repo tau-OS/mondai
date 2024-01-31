@@ -5,14 +5,6 @@ install_data(
     install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
 )
 
-symbolic_dir = 'icons/symbolic/apps'
-install_data(
-    symbolic_dir / f'com.fyralabs.Mondai-symbolic.svg',
-
-    install_dir: get_option('datadir') / 'icons/hicolor/symbolic/apps',
-    rename: f'com.fyralabs.Mondai-symbolic.svg',
-)
-
 install_data(
     meson.project_name() + '.gschema.xml',
     install_dir: join_paths(get_option('datadir'), 'glib-2.0', 'schemas'),
