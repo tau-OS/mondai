@@ -7,7 +7,9 @@ menu primary-menu {
 
 template MondaiMainWindow : He.ApplicationWindow {
   default-width: 360;
-  default-height: 700;
+  default-height: 600;
+  width-request: 360;
+  height-request: 294;
   resizable: false;
 
   Gtk.Box {
@@ -32,73 +34,75 @@ template MondaiMainWindow : He.ApplicationWindow {
       Gtk.StackPage {
         name: "select";
         
-        child: He.ViewMono {
+        child: Gtk.Box {
+          orientation: vertical;
           hexpand: true;
           vexpand: true;
+          margin-bottom: 18;
 
-          Gtk.Box {
-            orientation: vertical;
-            hexpand: true;
+          Gtk.ScrolledWindow s {
             vexpand: true;
+            margin-start: 18;
+            margin-end: 18;
 
-            Gtk.ScrolledWindow s {
+            Gtk.ListBox list_box {
               vexpand: true;
-              Gtk.ListBox list_box {
-                vexpand: true;
-                valign: start;
-                selection-mode: single;
+              valign: start;
+              selection-mode: single;
 
-                row-selected => on_listbox_row_selected();
-                
-                styles ["content-list"]
+              row-selected => on_listbox_row_selected();
+              
+              styles ["content-list"]
 
-                .MondaiProductItem {
-                  product: helium-shell;
-                }
+              .MondaiProductItem {
+                product: helium-shell;
+              }
 
-                .MondaiProductItem {
-                  product: fyra-accounts;
-                }
+              .MondaiProductItem {
+                product: fyra-accounts;
+              }
 
-                .MondaiProductItem {
-                  product: fermion;
-                }
+              .MondaiProductItem {
+                product: fermion;
+              }
 
-                .MondaiProductItem {
-                  product: abacus;
-                }
+              .MondaiProductItem {
+                product: abacus;
+              }
 
-                .MondaiProductItem {
-                  product: modi;
-                }
+              .MondaiProductItem {
+                product: modi;
+              }
 
-                .MondaiProductItem {
-                  product: enigma;
-                }
+              .MondaiProductItem {
+                product: enigma;
+              }
 
-                .MondaiProductItem {
-                  product: kairos;
-                }
+              .MondaiProductItem {
+                product: kairos;
+              }
 
-                .MondaiProductItem {
-                  product: buds;
-                }
+              .MondaiProductItem {
+                product: buds;
+              }
 
-                .MondaiProductItem {
-                  product: victrola;
-                }
+              .MondaiProductItem {
+                product: victrola;
+              }
 
-                .MondaiProductItem {
-                  product: nixie;
-                }
+              .MondaiProductItem {
+                product: nixie;
               }
             }
+          }
 
-            He.PillButton to_describe {
-              label: "Next";
-              sensitive: false;
-              margin-top: 12;
-            }
+          He.Divider {}
+
+          He.PillButton to_describe {
+            label: "Next";
+            sensitive: false;
+            margin-start: 18;
+            margin-end: 18;
           }
         };
       }
@@ -106,56 +110,63 @@ template MondaiMainWindow : He.ApplicationWindow {
       Gtk.StackPage {
         name: "describe";
         
-        child: He.ViewMono {
+        child: Gtk.Box {
           hexpand: true;
           vexpand: true;
+          orientation: vertical;
+          margin-bottom: 18;
 
-            Gtk.ScrolledWindow s1 {
+          Gtk.ScrolledWindow s1 {
+            vexpand: true;
+            margin-start: 18;
+            margin-end: 18;
+
+            Gtk.Box {
+              orientation: vertical;
+              spacing: 6;
+              hexpand: true;
               vexpand: true;
 
-              Gtk.Box {
-                orientation: vertical;
-                spacing: 12;
-                hexpand: true;
+              Gtk.Label {
+                label: _("Tell us the problem (Markdown supported)");
+                halign: start;
+              }
+
+              Gtk.TextView {
                 vexpand: true;
+                buffer: TextBuffer {
+                  changed => on_description_textbuffer_changed();
+                };
+                styles ["text-view"]
+              }
 
-                Gtk.Label {
-                  label: _("Tell us the problem (Markdown supported)");
-                  halign: start;
-                }
+              Gtk.Label {
+                label: _("What should happen? (Markdown supported)");
+                halign: start;
+              }
 
-                Gtk.TextView {
-                  vexpand: true;
-                  buffer: TextBuffer {
-                    changed => on_description_textbuffer_changed();
-                  };
-                  styles ["text-view"]
-                }
+              Gtk.TextView {
+                vexpand: true;
+                buffer: TextBuffer {
+                  changed => on_expected_textbuffer_changed();
+                };
+                styles ["text-view"]
+              }
 
-                Gtk.Label {
-                  label: _("What should happen? (Markdown supported)");
-                  halign: start;
-                }
-
-                Gtk.TextView {
-                  vexpand: true;
-                  buffer: TextBuffer {
-                    changed => on_expected_textbuffer_changed();
-                  };
-                  styles ["text-view"]
-                }
-
-                Gtk.CheckButton {
-                  label: _("I agree that my report will be made public");
-                  toggled => on_checkbutton_toggled();     
-                }
+              Gtk.CheckButton {
+                label: _("I agree that my report will be made public");
+                toggled => on_checkbutton_toggled();     
               }
             }
+          }
+
+          He.Divider {}
 
           He.PillButton submit {
+            margin-start: 18;
+            margin-end: 18;
             label: "Submit";
             sensitive: false;
-            margin-top: 12;
           }
         };
       }
@@ -163,21 +174,23 @@ template MondaiMainWindow : He.ApplicationWindow {
       Gtk.StackPage {
         name: "submitted";
 
-        child: He.ViewMono {
-          title: _("Report submitted");
+        child: Gtk.Box {
+          orientation: vertical;
+          spacing: 10;
+          hexpand: true;
+          vexpand: true;
+          margin-start: 18;
+          margin-end: 18;
 
-          Gtk.Box {
-            orientation: vertical;
-            spacing: 10;
-            hexpand: true;
-            vexpand: true;
+          He.ViewTitle {
+            label: _("Report Submitted");
+          }
 
-            Gtk.ScrolledWindow s2 {
-              Gtk.Label {
-                label: _("Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.");
-                halign: start;
-                wrap: true;
-              }
+          Gtk.ScrolledWindow s2 {
+            Gtk.Label {
+              label: _("Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.");
+              halign: start;
+              wrap: true;
             }
           }
         };
