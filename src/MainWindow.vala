@@ -27,14 +27,14 @@ public class Mondai.MainWindow : He.ApplicationWindow {
     unowned Gtk.Stack stack;
 
     [GtkChild]
-    unowned He.PillButton to_describe;
+    unowned He.Button to_describe;
 
     [GtkChild]
-    unowned He.PillButton submit;
+    unowned He.Button submit;
 
     public MainWindow (He.Application application) {
         Object (
-                application: application,
+                application : application,
                 icon_name: Config.APP_ID,
                 title: _("Mondai"),
                 resizable: false

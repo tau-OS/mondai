@@ -34,7 +34,7 @@ template MondaiMainWindow : He.ApplicationWindow {
 
       Gtk.StackPage {
         name: "select";
-        
+
         child: Gtk.Box {
           orientation: vertical;
           hexpand: true;
@@ -52,7 +52,7 @@ template MondaiMainWindow : He.ApplicationWindow {
               selection-mode: single;
 
               row-selected => on_listbox_row_selected();
-              
+
               styles ["content-list"]
 
               .MondaiProductItem {
@@ -99,8 +99,9 @@ template MondaiMainWindow : He.ApplicationWindow {
 
           He.Divider {}
 
-          He.PillButton to_describe {
+          He.Button to_describe {
             label: "Next";
+            is-pill: true;
             sensitive: false;
             margin-start: 18;
             margin-end: 18;
@@ -110,7 +111,7 @@ template MondaiMainWindow : He.ApplicationWindow {
 
       Gtk.StackPage {
         name: "describe";
-        
+
         child: Gtk.Box {
           hexpand: true;
           vexpand: true;
@@ -163,9 +164,10 @@ template MondaiMainWindow : He.ApplicationWindow {
 
           He.Divider {}
 
-          He.PillButton submit {
+          He.Button submit {
             margin-start: 18;
             margin-end: 18;
+            is-pill: true;
             label: "Submit";
             sensitive: false;
           }
