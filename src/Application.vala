@@ -17,13 +17,13 @@ public class Mondai.Application : He.Application {
     }
 
     public override void activate () {
-        this.active_window ? .present ();
+        this.active_window?.present ();
     }
 
     public override void startup () {
         Gdk.RGBA accent_color = { 0 };
         accent_color.parse ("#828292");
-        default_accent_color = He.Color.from_gdk_rgba (accent_color);
+        default_accent_color = He.from_gdk_rgba (accent_color);
 
         resource_base_path = "/com/fyralabs/Mondai";
 
