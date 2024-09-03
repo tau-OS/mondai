@@ -129,22 +129,22 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         insert_action_group ("win", actions);
 
         stack.visible_child_name = "select";
-        appbar.viewtitle_label = "";
-        appbar.viewtitle_label = _("Select a component");
+        appbar.viewtitle_widget = null;
+        appbar.viewtitle_widget = new He.ViewTitle () { label = _("Select Component") };
         appbar.show_back = false;
         appbar.scroller = s;
 
         to_describe.clicked.connect (() => {
             stack.visible_child_name = "describe";
-            appbar.viewtitle_label = "";
-            appbar.viewtitle_label = _("Describe the issue");
+            appbar.viewtitle_widget = null;
+            appbar.viewtitle_widget = new He.ViewTitle () { label = _("Describe Issue") };
             appbar.scroller = s1;
             appbar.show_back = true;
 
             appbar.back_button.clicked.connect (() => {
                 stack.visible_child_name = "select";
-                appbar.viewtitle_label = "";
-                appbar.viewtitle_label = _("Select a component");
+                appbar.viewtitle_widget = null;
+                appbar.viewtitle_widget = new He.ViewTitle () { label = _("Select Component") };
                 appbar.show_back = false;
                 appbar.scroller = s;
             });
@@ -153,14 +153,14 @@ public class Mondai.MainWindow : He.ApplicationWindow {
         submit.clicked.connect (() => {
             submit_report.begin (() => {
                 stack.visible_child_name = "submitted";
-                appbar.viewtitle_label = "";
-                appbar.viewtitle_label = _("Report submitted!");
+                appbar.viewtitle_widget = null;
+                appbar.viewtitle_widget = new He.ViewTitle () { label = _("Report submitted!") };
                 appbar.scroller = s2;
 
                 appbar.back_button.clicked.connect (() => {
                     stack.visible_child_name = "describe";
-                    appbar.viewtitle_label = "";
-                    appbar.viewtitle_label = _("Describe the issue");
+                    appbar.viewtitle_widget = null;
+                    appbar.viewtitle_widget = new He.ViewTitle () { label = _("Select Component") };
                     appbar.scroller = s1;
                 });
             });
