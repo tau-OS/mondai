@@ -12,192 +12,194 @@ template MondaiMainWindow : He.ApplicationWindow {
   height-request: 294;
   resizable: false;
 
-  Gtk.Box {
-    orientation: vertical;
+  Gtk.Overlay about_overlay {
+    child: Gtk.Box {
+      orientation: vertical;
 
-    He.AppBar appbar {
-      show-back: false;
-      show-right-title-buttons: true;
-      scroller: s;
+      He.AppBar appbar {
+        show-back: false;
+        show-right-title-buttons: true;
+        scroller: s;
 
-      [titlebar-menu]
-      Gtk.MenuButton {
-        icon-name: "open-menu-symbolic";
-        menu-model: primary-menu;
+        [titlebar-menu]
+        Gtk.MenuButton {
+          icon-name: "open-menu-symbolic";
+          menu-model: primary-menu;
+        }
       }
-    }
 
-    Gtk.Stack stack {
-      vhomogeneous: true;
-      vexpand: true;
-      transition-type: slide_left_right;
+      Gtk.Stack stack {
+        vhomogeneous: true;
+        vexpand: true;
+        transition-type: slide_left_right;
 
-      Gtk.StackPage {
-        name: "select";
+        Gtk.StackPage {
+          name: "select";
 
-        child: Gtk.Box {
-          orientation: vertical;
-          hexpand: true;
-          vexpand: true;
-          margin-bottom: 18;
+          child: Gtk.Box {
+            orientation: vertical;
+            hexpand: true;
+            vexpand: true;
+            margin-bottom: 18;
 
-          Gtk.ScrolledWindow s {
+            Gtk.ScrolledWindow s {
+              vexpand: true;
+              margin-start: 18;
+              margin-end: 18;
+
+              Gtk.ListBox list_box {
+                vexpand: true;
+                valign: start;
+                selection-mode: single;
+
+                row-selected => on_listbox_row_selected();
+
+                styles ["content-list"]
+
+                .MondaiProductItem {
+                  product: helium-shell;
+                }
+
+                .MondaiProductItem {
+                  product: fyra-accounts;
+                }
+
+                .MondaiProductItem {
+                  product: fermion;
+                }
+
+                .MondaiProductItem {
+                  product: abacus;
+                }
+
+                .MondaiProductItem {
+                  product: modi;
+                }
+
+                .MondaiProductItem {
+                  product: enigma;
+                }
+
+                .MondaiProductItem {
+                  product: kairos;
+                }
+
+                .MondaiProductItem {
+                  product: buds;
+                }
+
+                .MondaiProductItem {
+                  product: victrola;
+                }
+
+                .MondaiProductItem {
+                  product: nixie;
+                }
+              }
+            }
+
+            He.Divider {}
+
+            He.Button to_describe {
+              label: "Next";
+              is-pill: true;
+              sensitive: false;
+              margin-start: 18;
+              margin-end: 18;
+            }
+          };
+        }
+
+        Gtk.StackPage {
+          name: "describe";
+
+          child: Gtk.Box {
+            hexpand: true;
+            vexpand: true;
+            orientation: vertical;
+            margin-bottom: 18;
+
+            Gtk.ScrolledWindow s1 {
+              vexpand: true;
+              margin-start: 18;
+              margin-end: 18;
+
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 6;
+                hexpand: true;
+                vexpand: true;
+
+                Gtk.Label {
+                  label: _("Tell us the problem (Markdown supported)");
+                  halign: start;
+                }
+
+                Gtk.TextView {
+                  vexpand: true;
+                  buffer: TextBuffer {
+                    changed => on_description_textbuffer_changed();
+                  };
+                  styles ["text-view"]
+                }
+
+                Gtk.Label {
+                  label: _("What should happen? (Markdown supported)");
+                  halign: start;
+                }
+
+                Gtk.TextView {
+                  vexpand: true;
+                  buffer: TextBuffer {
+                    changed => on_expected_textbuffer_changed();
+                  };
+                  styles ["text-view"]
+                }
+
+                Gtk.CheckButton {
+                  label: _("I agree that my report will be made public");
+                  toggled => on_checkbutton_toggled();     
+                }
+              }
+            }
+
+            He.Divider {}
+
+            He.Button submit {
+              margin-start: 18;
+              margin-end: 18;
+              is-pill: true;
+              label: "Submit";
+              sensitive: false;
+            }
+          };
+        }
+
+        Gtk.StackPage {
+          name: "submitted";
+
+          child: Gtk.Box {
+            orientation: vertical;
+            spacing: 10;
+            hexpand: true;
             vexpand: true;
             margin-start: 18;
             margin-end: 18;
 
-            Gtk.ListBox list_box {
-              vexpand: true;
-              valign: start;
-              selection-mode: single;
-
-              row-selected => on_listbox_row_selected();
-
-              styles ["content-list"]
-
-              .MondaiProductItem {
-                product: helium-shell;
-              }
-
-              .MondaiProductItem {
-                product: fyra-accounts;
-              }
-
-              .MondaiProductItem {
-                product: fermion;
-              }
-
-              .MondaiProductItem {
-                product: abacus;
-              }
-
-              .MondaiProductItem {
-                product: modi;
-              }
-
-              .MondaiProductItem {
-                product: enigma;
-              }
-
-              .MondaiProductItem {
-                product: kairos;
-              }
-
-              .MondaiProductItem {
-                product: buds;
-              }
-
-              .MondaiProductItem {
-                product: victrola;
-              }
-
-              .MondaiProductItem {
-                product: nixie;
-              }
+            He.ViewTitle {
+              label: _("Report Submitted");
             }
-          }
 
-          He.Divider {}
-
-          He.Button to_describe {
-            label: "Next";
-            is-pill: true;
-            sensitive: false;
-            margin-start: 18;
-            margin-end: 18;
-          }
-        };
-      }
-
-      Gtk.StackPage {
-        name: "describe";
-
-        child: Gtk.Box {
-          hexpand: true;
-          vexpand: true;
-          orientation: vertical;
-          margin-bottom: 18;
-
-          Gtk.ScrolledWindow s1 {
-            vexpand: true;
-            margin-start: 18;
-            margin-end: 18;
-
-            Gtk.Box {
-              orientation: vertical;
-              spacing: 6;
-              hexpand: true;
-              vexpand: true;
-
+            Gtk.ScrolledWindow s2 {
               Gtk.Label {
-                label: _("Tell us the problem (Markdown supported)");
+                label: _("Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.");
                 halign: start;
-              }
-
-              Gtk.TextView {
-                vexpand: true;
-                buffer: TextBuffer {
-                  changed => on_description_textbuffer_changed();
-                };
-                styles ["text-view"]
-              }
-
-              Gtk.Label {
-                label: _("What should happen? (Markdown supported)");
-                halign: start;
-              }
-
-              Gtk.TextView {
-                vexpand: true;
-                buffer: TextBuffer {
-                  changed => on_expected_textbuffer_changed();
-                };
-                styles ["text-view"]
-              }
-
-              Gtk.CheckButton {
-                label: _("I agree that my report will be made public");
-                toggled => on_checkbutton_toggled();     
+                wrap: true;
               }
             }
-          }
-
-          He.Divider {}
-
-          He.Button submit {
-            margin-start: 18;
-            margin-end: 18;
-            is-pill: true;
-            label: "Submit";
-            sensitive: false;
-          }
-        };
+          };
+        }
       }
-
-      Gtk.StackPage {
-        name: "submitted";
-
-        child: Gtk.Box {
-          orientation: vertical;
-          spacing: 10;
-          hexpand: true;
-          vexpand: true;
-          margin-start: 18;
-          margin-end: 18;
-
-          He.ViewTitle {
-            label: _("Report Submitted");
-          }
-
-          Gtk.ScrolledWindow s2 {
-            Gtk.Label {
-              label: _("Thank you for submitting your bug report. A Fyra Labs staff member will shortly review your report.");
-              halign: start;
-              wrap: true;
-            }
-          }
-        };
-      }
-    }
+    };
   }
 }

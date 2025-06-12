@@ -15,6 +15,9 @@ public class Mondai.MainWindow : He.ApplicationWindow {
     private bool agreed_tos = false;
 
     [GtkChild]
+    unowned Gtk.Overlay about_overlay;
+
+    [GtkChild]
     unowned He.AppBar appbar;
     [GtkChild]
     unowned Gtk.ScrolledWindow s;
@@ -58,6 +61,7 @@ public class Mondai.MainWindow : He.ApplicationWindow {
                                         He.AboutWindow.Licenses.GPLV3,
                                         He.Colors.DARK
         );
+        about_overlay.add_overlay (about);
         about.present ();
     }
 
